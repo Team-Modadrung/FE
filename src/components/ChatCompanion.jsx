@@ -8,48 +8,45 @@ function ChatCompanion() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSend = async () => {
-    if (input.trim()) {
-      // 사용자 메시지 추가
-      const userMessage = { text: input, sender: "user" };
-      setMessages((prev) => [...prev, userMessage]);
-      setInput("");
-      setIsLoading(true);
+    if (isLoading || !input.trim()) return; // 중복 전송 방지 + 빈 입력 무시
 
-      try {
-        // OpenAI API 호출
-        const response = await axios.post(
-          "https://api.openai.com/v1/chat/completions",
-          {
-            model: "gpt-3.5-turbo", // 또는 gpt-4, 사용 가능한 모델 확인 필요
-            messages: [
-              { role: "system", content: "You are a helpful assistant." },
-              { role: "user", content: input },
-            ],
-            max_tokens: 150,
+    setIsLoading(true); // 즉시 처리 중 상태 설정
+    const userMessage = { text: input, sender: "user" };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: input }],
+          max_tokens: 150,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            "Content-Type": "application/json",
           },
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        }
+      );
 
-        // OpenAI 응답 메시지 추가
-        const botMessage = {
-          text: response.data.choices[0].message.content.trim(),
-          sender: "bot",
-        };
-        setMessages((prev) => [...prev, botMessage]);
-      } catch (error) {
-        console.error("OpenAI API 호출 오류:", error);
-        setMessages((prev) => [
-          ...prev,
-          { text: "오류가 발생했습니다. 다시 시도해주세요.", sender: "bot" },
-        ]);
-      } finally {
-        setIsLoading(false);
-      }
+      const botMessage = {
+        text: response.data.choices[0].message.content.trim(),
+        sender: "bot",
+      };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error("OpenAI API 호출 오류:", error);
+
+      const errorText =
+        error.response?.status === 429
+          ? "요청이 너무 많습니다. 잠시 후 다시 시도해주세요."
+          : "오류가 발생했습니다. 다시 시도해주세요.";
+
+      setMessages((prev) => [...prev, { text: errorText, sender: "bot" }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -62,6 +59,7 @@ function ChatCompanion() {
           overflowY: "auto",
           border: "1px solid #ccc",
           padding: "1rem",
+          borderRadius: "5px",
         }}
       >
         {messages.map((msg, index) => (
@@ -91,6 +89,11 @@ function ChatCompanion() {
           marginBottom: "1rem",
         }}
         disabled={isLoading}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSend();
+          }
+        }}
       />
       <button onClick={handleSend} disabled={isLoading}>
         {isLoading ? "처리 중..." : "보내기"}

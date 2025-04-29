@@ -4,6 +4,7 @@ import "../style/styles.css";
 function Nav() {
   return (
     <nav className="navbar">
+      <div className="nav-title">토모봇</div>
       <ul className="nav-list">
         <li>
           <Link to="/" className="nav-link">
@@ -12,7 +13,7 @@ function Nav() {
         </li>
         <li>
           <Link to="/digital-guide" className="nav-link">
-            디지털 안내
+            디지털 배우기
           </Link>
         </li>
         <li>
@@ -22,7 +23,7 @@ function Nav() {
         </li>
         <li>
           <Link to="/safety-monitor" className="nav-link">
-            안전 체크
+            안전
           </Link>
         </li>
       </ul>

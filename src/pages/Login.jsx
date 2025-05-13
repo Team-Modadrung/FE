@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "../style/styles.css"; // 아래 CSS 따로 분리 가능
+import "../style/styles.css";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    username: "",
+    guardianPhone: "",
     password: "",
   });
 
@@ -19,9 +19,11 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      alert(`로그인 시도: ${formData.email}`);
+      alert(`로그인 시도: ${formData.username}`);
     } else {
-      alert(`회원가입 시도: ${formData.name} / ${formData.email}`);
+      alert(
+        `회원가입 시도: 아이디(${formData.username}), 보호자 번호(${formData.guardianPhone})`
+      );
     }
   };
 
@@ -44,24 +46,24 @@ function Login() {
         </div>
         <h2 className="auth-title">{isLogin ? "로그인" : "회원가입"}</h2>
         <form onSubmit={handleSubmit} className="auth-form">
+          <input
+            type="text"
+            name="username"
+            placeholder="아이디"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
           {!isLogin && (
             <input
-              type="text"
-              name="name"
-              placeholder="이름"
-              value={formData.name}
+              type="tel"
+              name="guardianPhone"
+              placeholder="보호자 휴대폰번호"
+              value={formData.guardianPhone}
               onChange={handleChange}
               required
             />
           )}
-          <input
-            type="email"
-            name="email"
-            placeholder="이메일"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
           <input
             type="password"
             name="password"

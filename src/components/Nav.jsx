@@ -26,6 +26,11 @@ function Nav() {
             안전
           </Link>
         </li>
+        <li>
+          <Link className="nav-link" to="/auth">
+            로그인
+          </Link>
+        </li>
       </ul>
     </nav>
   );

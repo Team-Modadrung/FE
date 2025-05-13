@@ -5,6 +5,8 @@ import Nav from "../components/Nav";
 import DigitalGuide from "../components/DigitalGuide";
 import ChatCompanion from "../components/ChatCompanion";
 import SafetyMonitor from "../components/SafetyMonitor";
+import Login from "../pages/Login";
+// import Signup from "../pages/SignUp";
 
 function Router() {
   return (
@@ -12,6 +14,7 @@ function Router() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<Login />} />
         <Route path="/digital-guide" element={<DigitalGuide />} />
         <Route path="/chat-companion" element={<ChatCompanion />} />
         <Route path="/safety-monitor" element={<SafetyMonitor />} />

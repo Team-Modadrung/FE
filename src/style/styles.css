@@ -114,3 +114,95 @@ button:hover {
 .container {
   padding: 3rem 3rem;
 }
+
+@media (max-width: 600px) {
+  .nav-title {
+    font-size: 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+  }
+}
+/* 모바일 화면에서 버튼 크기 조정 */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fefefe;
+}
+
+.auth-card {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.auth-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.auth-tabs button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.auth-tabs button.active {
+  color: #4caf50;
+  border-color: #4caf50;
+}
+
+.auth-title {
+  font-size: 1.8rem;
+  color: #4caf50;
+  margin-bottom: 1.8rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-form input {
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.auth-form input:focus {
+  border-color: #4caf50;
+}
+
+.auth-form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-form button:hover {
+  background-color: #388e3c;
+}

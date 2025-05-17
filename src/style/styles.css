@@ -1,22 +1,30 @@
-body {
+/* 초기화 및 기본 스타일 */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Nanum Gothic", Arial, sans-serif;
-  background-color: #fefefe;
-  color: #333;
 }
 
-/* 앱의 상단 네비게이션바 스타일 */
+body {
+  font-family: "Nanum Gothic", Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+  font-size: 20px; /* 전체 글꼴 크기 증가 */
+}
+
+/* 네비게이션 바 */
 .navbar {
   background-color: #4caf50;
   padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .nav-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: white;
   font-weight: bold;
   letter-spacing: 1px;
@@ -25,19 +33,21 @@ body {
 .nav-list {
   list-style: none;
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   margin: 0;
   padding: 0;
+  flex-wrap: wrap;
 }
 
 .nav-link {
   color: white;
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
   color: #ffd54f;
 }
 
@@ -45,164 +55,101 @@ body {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 2rem;
   text-align: center;
 }
 
 h1 {
-  font-size: 2.4rem;
-  margin-bottom: 2rem;
+  font-size: 2.6rem;
+  margin-bottom: 1.5rem;
   color: #4caf50;
-  line-height: 1.3;
 }
 
+/* 버튼 */
 button {
   display: block;
   width: 100%;
-  max-width: 350px;
-  font-size: 1.6rem;
-  padding: 1.2rem;
+  max-width: 400px;
+  font-size: 2rem;
+  padding: 1.5rem;
   margin: 1.5rem auto;
   cursor: pointer;
   border: none;
   background-color: #4caf50;
   color: white;
-  border-radius: 12px;
+  border-radius: 14px;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+button:hover,
+button:focus {
   background-color: #388e3c;
 }
 
-@media (min-width: 600px) {
-  button {
-    font-size: 1.8rem;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* 텍스트 크기 및 버튼 크기 조정 */
-h1,
-.nav-title {
-  font-size: 2rem;
-}
-
-.nav-link {
-  font-size: 1.5rem;
-}
-
-/* 접근성 향상을 위한 대비 조정 */
-body {
-  background-color: #fff;
-  color: #333;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-}
-
-button:hover {
-  background-color: #388e3c;
-}
-
-/* 패딩 및 여백을 더 주어 요소 간 간격을 늘림 */
-.container {
-  padding: 3rem 3rem;
-}
-
+/* 모바일 (작은 화면) 대응 */
 @media (max-width: 600px) {
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+    z-index: 1000;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+    background-color: #4caf50;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
   .nav-title {
-    font-size: 1.5rem;
+    display: none;
+  }
+
+  .nav-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    margin: 0;
   }
 
   .nav-link {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    padding: 0.8rem 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .container {
+    padding: 2rem;
+    margin-bottom: 5.5rem; /* 하단 네비게이션 높이만큼 여백 확보 */
+  }
+
+  .auth-form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .auth-tabs {
+    gap: 2rem;
+  }
+
+  .auth-title {
+    font-size: 2rem;
   }
 }
-/* 모바일 화면에서 버튼 크기 조정 */
-.auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #fefefe;
-}
 
-.auth-card {
-  background: white;
-  border-radius: 16px;
-  padding: 3rem 2.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-}
+/* 데스크탑용 추가 확대 */
+@media (min-width: 600px) {
+  button {
+    font-size: 2.2rem;
+  }
 
-.auth-tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
-}
-
-.auth-tabs button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #888;
-  cursor: pointer;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.auth-tabs button.active {
-  color: #4caf50;
-  border-color: #4caf50;
-}
-
-.auth-title {
-  font-size: 1.8rem;
-  color: #4caf50;
-  margin-bottom: 1.8rem;
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.auth-form input {
-  padding: 1rem;
-  font-size: 1.1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  transition: border 0.2s ease;
-}
-
-.auth-form input:focus {
-  border-color: #4caf50;
-}
-
-.auth-form button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 1rem;
-  font-size: 1.2rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.auth-form button:hover {
-  background-color: #388e3c;
+  .nav-link {
+    font-size: 2rem;
+  }
 }

@@ -45,7 +45,7 @@ function DigitalGuide() {
       }}
     >
       <h2 style={{ fontSize: "2.2rem", marginBottom: "2rem" }}>
-        📱 디지털 기기 안내
+        디지털 기기 안내
       </h2>
       {guides.map((guide, index) => (
         <div
@@ -91,7 +91,7 @@ function DigitalGuide() {
               marginBottom: openIndex === index ? "2rem" : "0",
             }}
           >
-            {openIndex === index ? "간단히 보기" : "📖 더 알아보기"}
+            {openIndex === index ? "간단히 보기" : "더 알아보기"}
           </button>
 
           {openIndex === index && (
@@ -130,7 +130,7 @@ function DigitalGuide() {
                   marginTop: "1rem",
                 }}
               >
-                🔊 설명 듣기
+                설명 듣기
               </button>
             </div>
           )}

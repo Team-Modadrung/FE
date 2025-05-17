@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import "../style/styles.css";
+import React, { use, useState } from "react";
+import "../style/login.css"; // Assuming you have a CSS file for styling
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const nav = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: "",
@@ -20,16 +22,18 @@ function Login() {
     e.preventDefault();
     if (isLogin) {
       alert(`로그인 시도: ${formData.username}`);
+      nav("/"); // Redirect to home after login
     } else {
       alert(
         `회원가입 시도: 아이디(${formData.username}), 보호자 번호(${formData.guardianPhone})`
       );
+      nav("/auth"); // Redirect to home after signup
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
+      <div className="auth-form-wrapper">
         <div className="auth-tabs">
           <button
             className={isLogin ? "active" : ""}

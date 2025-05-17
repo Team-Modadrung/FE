@@ -1,0 +1,156 @@
+/* 챗봇 컨테이너 */
+.chat-companion {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.chat-companion-title {
+  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+.chat-companion-warning {
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
+  color: #666;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+/* 채팅 박스 */
+.chat-companion-box {
+  height: 60vh;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #fafafa;
+  margin-bottom: 1rem;
+  scroll-behavior: smooth;
+}
+
+/* 채팅 메시지 */
+.chat-companion-message {
+  font-size: clamp(0.9rem, 3.5vw, 1rem);
+  padding: 0.6rem 1rem;
+  border-radius: 15px;
+  margin: 0.5rem 0;
+  max-width: 80%;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.chat-companion-message.user {
+  text-align: right;
+  color: blue;
+  background-color: #e1f5fe;
+  margin-left: auto;
+}
+
+.chat-companion-message.bot {
+  text-align: left;
+  color: black;
+  background-color: #f1f1f1;
+  margin-right: auto;
+}
+
+/* 상태 메시지 */
+.chat-companion-status {
+  text-align: center;
+  font-style: italic;
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
+}
+
+.chat-companion-status.loading {
+  color: gray;
+}
+
+.chat-companion-status.listening {
+  color: green;
+}
+
+/* 입력 그룹 */
+.chat-companion-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chat-companion-input {
+  flex-grow: 1;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  padding: 0.8rem;
+  height: 3rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+.chat-companion-input:focus {
+  border-color: #228be6;
+}
+
+.chat-companion-input:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.chat-companion-button {
+  height: 3rem;
+  padding: 0 1.2rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #228be6;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.chat-companion-button:hover:not(:disabled),
+.chat-companion-button:focus:not(:disabled) {
+  background-color: #1a6dc0;
+}
+
+.chat-companion-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+  .chat-companion {
+    padding: 0.5rem;
+    margin: 1rem auto;
+  }
+
+  .chat-companion-box {
+    /* height: 50vh; */ /* 기존 높이 설정 제거 */
+    height: auto; /* 내용에 따라 자동으로 높이 조절 */
+    min-height: 50vh; /* 필요하다면 최소 높이 설정 */
+  }
+
+  .chat-companion-input-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .chat-companion-input,
+  .chat-companion-button {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .chat-companion-input {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+  }
+}

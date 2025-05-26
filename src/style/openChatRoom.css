@@ -1,0 +1,100 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.chat-area {
+  height: 50vh;
+  overflow-y: auto;
+  background: #f9f9f9;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 2rem;
+  text-align: left;
+}
+
+.chat-line {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.my-message {
+  margin-left: auto;
+  background-color: #4caf50; /* Green for my messages */
+  color: white;
+  text-align: right;
+}
+
+.other-message {
+  margin-right: auto;
+  background-color: #e0e0e0; /* Light gray for others */
+  color: black;
+}
+
+.chat-sender {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-area input {
+  font-size: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+}
+
+.input-area button {
+  font-size: 2.2rem;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 14px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-area button:hover {
+  background-color: #388e3c;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .chat-area {
+    height: 40vh;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .chat-line {
+    max-width: 80%;
+    padding: 0.8rem;
+  }
+
+  .chat-sender {
+    font-size: 1.8rem;
+  }
+
+  .input-area input,
+  .input-area button {
+    font-size: 1.8rem;
+    padding: 1.2rem;
+  }
+}

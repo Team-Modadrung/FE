@@ -6,6 +6,7 @@ import DigitalGuide from "../components/DigitalGuide";
 import ChatCompanion from "../components/ChatCompanion";
 import SafetyMonitor from "../components/SafetyMonitor";
 import Login from "../pages/Login";
+import OpenChatRoom from "../components/OpenChatRoom";
 // import Signup from "../pages/SignUp";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
         <Route path="/digital-guide" element={<DigitalGuide />} />
         <Route path="/chat-companion" element={<ChatCompanion />} />
         <Route path="/safety-monitor" element={<SafetyMonitor />} />
+        <Route path="/open" element={<OpenChatRoom />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,5 @@
-import React, { use, useState } from "react";
-import "../style/login.css"; // Assuming you have a CSS file for styling
+import React, { useState } from "react";
+import "../style/login.css";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -7,6 +7,7 @@ function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: "",
+    email: "",
     guardianPhone: "",
     password: "",
   });
@@ -22,12 +23,12 @@ function Login() {
     e.preventDefault();
     if (isLogin) {
       alert(`로그인 시도: ${formData.username}`);
-      nav("/"); // Redirect to home after login
+      nav("/");
     } else {
       alert(
-        `회원가입 시도: 아이디(${formData.username}), 보호자 번호(${formData.guardianPhone})`
+        `회원가입 시도: 아이디(${formData.username}), 이메일(${formData.email}), 보호자 번호(${formData.guardianPhone})`
       );
-      nav("/auth"); // Redirect to home after signup
+      nav("/auth");
     }
   };
 
@@ -59,14 +60,24 @@ function Login() {
             required
           />
           {!isLogin && (
-            <input
-              type="tel"
-              name="guardianPhone"
-              placeholder="보호자 휴대폰번호"
-              value={formData.guardianPhone}
-              onChange={handleChange}
-              required
-            />
+            <>
+              <input
+                type="email"
+                name="email"
+                placeholder="이메일"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="tel"
+                name="guardianPhone"
+                placeholder="보호자 휴대폰번호"
+                value={formData.guardianPhone}
+                onChange={handleChange}
+                required
+              />
+            </>
           )}
           <input
             type="password"

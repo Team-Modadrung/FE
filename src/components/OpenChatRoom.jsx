@@ -1,31 +1,67 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../style/openChatRoom.css";
+import axios from "axios";
 
 const OpenChatRoom = () => {
-  const [messages, setMessages] = useState([
-    { id: 1, sender: "시스템", text: "안녕하세요! 채팅을 시작해보세요." },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
 
-  // Scroll to bottom of chat
+  const API = axios.create({
+    baseURL: "http://localhost:5000/api",
+  });
+
+  API.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const res = await API.get("/region-chat");
+        setMessages(res.data.messages);
+      } catch (err) {
+        console.error("메시지 불러오기 실패:", err);
+        alert("❌ 로그인 해주세요.");
+      }
+    };
+
+    fetchMessages();
+  }, []);
+
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Send message function
-  const handleSend = () => {
-    const trimmed = input.trim();
+  // 새 메시지 수신 시 다른 사람 메시지일 경우 TTS 실행
+  useEffect(() => {
+    if (messages.length === 0) return;
+    const myName = localStorage.getItem("name");
+    const lastMsg = messages[messages.length - 1];
+    if (lastMsg.userName !== myName) {
+      playTTS(lastMsg.message);
+    }
+  }, [messages]);
+
+  const handleSend = async (msgText) => {
+    const trimmed = msgText.trim();
     if (trimmed === "") return;
 
-    setMessages((prev) => [
-      ...prev,
-      { id: Date.now(), sender: "나", text: trimmed },
-    ]);
-    setInput("");
+    try {
+      await API.post("/region-chat", { message: trimmed });
+      const res = await API.get("/region-chat");
+      setMessages(res.data.messages);
+      setInput("");
+    } catch (err) {
+      console.error("메시지 전송 실패:", err);
+      alert("❌ 메시지를 전송하지 못했습니다.");
+    }
   };
 
-  // Debounce to prevent double execution
   const debounce = (func, wait) => {
     let timeout;
     return (...args) => {
@@ -34,15 +70,54 @@ const OpenChatRoom = () => {
     };
   };
 
-  const debouncedHandleSend = debounce(handleSend, 100);
+  const debouncedHandleSend = debounce(() => handleSend(input), 100);
 
-  // Handle Enter key press
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.repeat) {
       e.preventDefault();
       debouncedHandleSend();
     }
   };
+
+  // 음성 인식 → 인식 끝나면 바로 메시지 전송
+  const handleSpeak = () => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("이 브라우저는 음성 인식을 지원하지 않습니다.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "ko-KR";
+    recognition.start();
+
+    recognition.onresult = async (event) => {
+      const speechResult = event.results[0][0].transcript;
+      setInput(speechResult);
+      await handleSend(speechResult); // 인식된 내용 바로 전송
+    };
+
+    recognition.onerror = (event) => {
+      console.error("음성 인식 오류:", event.error);
+      alert("❌ 음성 인식에 실패했습니다.");
+    };
+  };
+
+  // TTS 함수
+  const playTTS = (text) => {
+    if (!window.speechSynthesis) {
+      console.warn("TTS 지원 안됨");
+      return;
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "ko-KR";
+    window.speechSynthesis.speak(utter);
+  };
+
+  const myName = localStorage.getItem("name");
 
   return (
     <div className="container">
@@ -51,15 +126,15 @@ const OpenChatRoom = () => {
       <div className="chat-area">
         {messages.map((msg) => (
           <div
-            key={msg.id}
+            key={msg._id}
             className={`chat-line ${
-              msg.sender === "나" ? "my-message" : "other-message"
+              msg.userName === myName ? "my-message" : "other-message"
             }`}
           >
-            {msg.sender !== "나" && (
-              <span className="chat-sender">{msg.sender}</span>
+            {msg.userName !== myName && (
+              <span className="chat-sender">{msg.userName}</span>
             )}
-            {msg.text}
+            <div className="chat-bubble">{msg.message}</div>
           </div>
         ))}
         <div ref={chatEndRef} />
@@ -73,6 +148,7 @@ const OpenChatRoom = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
         />
+        <button onClick={handleSpeak}>말하기</button>
         <button onClick={debouncedHandleSend}>보내기</button>
       </div>
     </div>

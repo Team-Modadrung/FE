@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../style/login.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const nav = useNavigate();
@@ -10,6 +11,7 @@ function Login() {
     email: "",
     guardianPhone: "",
     password: "",
+    region: "",
   });
 
   const handleChange = (e) => {
@@ -19,16 +21,37 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      alert(`로그인 시도: ${formData.username}`);
-      nav("/");
-    } else {
-      alert(
-        `회원가입 시도: 아이디(${formData.username}), 이메일(${formData.email}), 보호자 번호(${formData.guardianPhone})`
-      );
-      nav("/auth");
+
+    try {
+      if (isLogin) {
+        // 로그인 API 요청
+        const res = await axios.post("http://localhost:5000/api/login", {
+          name: formData.username,
+          password: formData.password,
+        });
+
+        // ✅ 토큰 저장
+        localStorage.setItem("token", res.data.token);
+
+        alert("✅ 로그인 성공");
+        nav("/"); // 로그인 성공 시 홈으로 이동
+      } else {
+        // 회원가입 API 요청
+        const res = await axios.post("http://localhost:5000/api/register", {
+          name: formData.username,
+          password: formData.password,
+          guardianContact: formData.guardianPhone,
+          guardianEmail: formData.email,
+          region: formData.region,
+        });
+        alert("✅ 회원가입 성공");
+        nav("/auth"); // 회원가입 후 로그인 화면 또는 다른 화면
+      }
+    } catch (err) {
+      console.error("❌ 요청 실패:", err.response?.data || err.message);
+      alert("❌ 에러 발생: " + (err.response?.data?.message || err.message));
     }
   };
 
@@ -74,6 +97,14 @@ function Login() {
                 name="guardianPhone"
                 placeholder="보호자 휴대폰번호"
                 value={formData.guardianPhone}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="region"
+                placeholder="거주 지역 (예: 서울, 부산)"
+                value={formData.region}
                 onChange={handleChange}
                 required
               />

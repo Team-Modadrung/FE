@@ -1,19 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../style/styles.css";
 
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   const handleAuthButton = () => {
     if (isLoggedIn) {
-      // 로그아웃 처리: 예를 들어 상태를 false로 바꾸고, 홈으로 이동
+      localStorage.removeItem("token"); // 로그아웃 처리
       setIsLoggedIn(false);
-      // 로그아웃 후 원하는 경로로 이동 (예: 홈)
       navigate("/");
     } else {
-      // 로그인 페이지로 이동
       navigate("/auth");
     }
   };

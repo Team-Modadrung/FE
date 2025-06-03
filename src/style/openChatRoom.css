@@ -46,11 +46,12 @@
 
 .input-area {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 .input-area input {
+  flex: 1;
   font-size: 2rem;
   padding: 1.5rem;
   border-radius: 12px;
@@ -58,14 +59,14 @@
 }
 
 .input-area button {
-  font-size: 2.2rem;
-  padding: 1.5rem;
+  font-size: 1.8rem;
+  padding: 1rem 1.5rem;
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   background-color: #4caf50;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .input-area button:hover {

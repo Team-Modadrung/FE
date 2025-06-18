@@ -93,9 +93,23 @@
     font-size: 1.8rem;
   }
 
-  .input-area input,
+  .input-area {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Make children take full width */
+    gap: 0.5rem; /* Reduced gap for closer button spacing */
+  }
+
+  .input-area input {
+    font-size: 1.8rem;
+    padding: 1.2rem;
+    width: 100%; /* Ensure input takes full width */
+  }
+
   .input-area button {
     font-size: 1.8rem;
     padding: 1.2rem;
+    width: 100%; /* Buttons take full width */
+    white-space: normal;
+    text-align: center;
   }
 }

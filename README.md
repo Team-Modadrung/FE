@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# 🤖 Tomobot
+**디지털 격차 해소와 독거노인의 고독사 예방을 위한 AI 챗봇 서비스** 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+![홈화면 ](https://github.com/user-attachments/assets/2d69617d-ef21-4a75-8dcc-4df9a8b5df51)
+</p>  
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📖 프로젝트 개요  
 
-### `npm start`
+대한민국은 현재 **고령화 심화와 1인 가구 증가**로 인해 독거노인의 수가 약 160만 명에 달하고 있습니다.  
+응급상황 시 외부와 연결이 되지 않아 **고독사**로 이어질 수 있는 심각한 사회 문제가 발생하고 있으며,  
+이 문제를 예방하기 위해 **AI 기반 돌봄 챗봇 "토모봇"** 을 개발했습니다.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+토모봇은 음성인식 기반의 챗봇으로,  
+- 고령층이 **쉽게 접근 가능한 인터페이스** 제공  
+- 응급상황을 대비한 **자동 알림 시스템** 구축  
+- 정서적 교감과 대화 지원을 통한 **외로움 완화**  
+를 목표로 합니다.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🎯 목표  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **고독사 예방 및 사회적 연결망 형성**  
+   - 매일 사용자 응답(체크인)을 확인  
+   - 24시간 이상 반응이 없을 시 보호자에게 자동 알림 문자 발송  
+   - 지역별 오픈 채팅방을 통한 사회적 연결망 강화  
 
-### `npm run build`
+2. **정서적 교감과 말벗 역할 수행**  
+   - 사용자의 요청 시 언제든 대화 가능  
+   - 친근한 말투, 공감과 경청 기반의 상담 기능 제공  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **감정분석 및 대화 요약본 전송**  
+   - 대화 내용을 요약 및 감정 분석 후 보호자에게 이메일 전송  
+   - 보호자가 정서 변화를 조기 파악하도록 지원  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **디지털 소외 해소**  
+   - 영상, 사진, 설명을 활용한 디지털 기기 사용법 안내  
+   - 고령층의 디지털 접근성을 강화  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🌟 기대 효과  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. 보호자 및 복지 시스템과 연결된 **안전망 구축 및 고독사 예방**  
+2. 고령층의 **정서적 고립 해소 및 고독감 완화**  
+3. 정서적 이상 징후를 조기 발견, 보호자와의 유대감 유지  
+4. 고령층의 **디지털 기기 활용 두려움 극복**  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🛠 기술 스택  
+| 분야           | 기술                               |
+| ------------- | -------------------------------- |
+| **Language**  | JavaScript                       |
+| **Framework** | React                            |
+| **State**     | Recoil, React-Query              |
+| **API 통신**   | Axios                            |
+| **Styling**   | Styled-Components                |
+| **Infra**     | AWS (S3)                         |
+| **협업/관리**   | GitHub Projects                  |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🎨 주요 기능  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| 🔐 로그인 / 회원가입 | ✅ 체크인 & 응급 알림 |
+| :-------- | :------ |
+| ![로그인](https://github.com/user-attachments/assets/ba9295ec-904a-4815-a9ef-08e4e2bb2fe8) | ![체크인](https://github.com/user-attachments/assets/0831b409-1e7b-4517-afef-3a9f7a088e65) |
+| 사용자 정보를 등록하고 보호자 연락처, 거주 지역, 대화 기록 등을 관리합니다. | 하루 1회 체크인 여부를 확인하고, 24시간 이상 반응이 없으면 보호자에게 자동 알림을 전송합니다. |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+| 💬 AI 말벗 기능 | 📧 대화 요약 & 감정 분석 |
+| :-------- | :------ |
+| ![말벗](https://github.com/user-attachments/assets/367cffe0-4327-4b41-9ffd-fcee94da75b4) | ![감정분석](https://github.com/user-attachments/assets/69859d67-229d-494d-b590-339964e4c3a0) |
+| 노인 사용자가 원할 때 언제든 대화할 수 있으며, 외로움 완화와 정서적 교감을 지원합니다. | 대화 내용을 요약하고 감정 상태를 분석해 보호자에게 이메일로 자동 전송합니다. |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+| 🏘 지역 기반 오픈 채팅 | 📱 디지털 기기 배우기 |
+| :-------- | :------ |
+| ![채팅](https://github.com/user-attachments/assets/66b7ca19-f14d-47b4-aba2-292c6077115f) | ![디지털배움](https://github.com/user-attachments/assets/7d2ef3b3-3fae-4e46-8be4-d4fc528dcdc9) |
+| 같은 지역 노인끼리 소규모 커뮤니티를 형성해 사회적 교류와 고립감 완화를 돕습니다. | 영상, 이미지, 쉬운 설명을 통해 키오스크, ATM, 스마트폰 등 필수 디지털 기기 사용법을 학습할 수 있습니다. |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 📄 프로젝트 자료
+- [완료 보고서](https://github.com/user-attachments/files/22462019/1._.2.pdf)
+- [발표 자료](https://github.com/user-attachments/files/22462018/3._.pdf)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

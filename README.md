@@ -2,7 +2,7 @@
 **디지털 격차 해소와 독거노인의 고독사 예방을 위한 AI 챗봇 서비스** 
 
 <p align="center">
-![홈화면 ](https://github.com/user-attachments/assets/2d69617d-ef21-4a75-8dcc-4df9a8b5df51)
+<img width="407" height="407" alt="야옹에듀-07 1" src="https://github.com/user-attachments/assets/5156eccf-7d30-4949-b507-8a0f941fe92f" />
 </p>  
 
 ---
